@@ -32,7 +32,3 @@ urlpatterns = [
     #添加接口根路劲
     url(r'^api/',include('sign.urls',namespace="sign")),
 ]
-#哈哈哈哈
-#hahahahaha123123123123
-#12313123123123123123123123123123
-#这是dev分支写的一些代码
