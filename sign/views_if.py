@@ -14,13 +14,13 @@ def add_event(request):
     start_time = request.POST.get('start_time','') #发布会时间
 
     if eid == '' or name == '' or limit == '' or status =='' or address == '' or start_time =='':
-        return JsonResponse({'starus':10021,'message':'参数错误'})
+        return JsonResponse({'status':10021,'message':'参数错误'})
     result = Event.objects.filter(id=eid)
     if result:
-        return JsonResponse({'starus':10022,'message':'发布会编号已存在'})
+        return JsonResponse({'status':10022,'message':'发布会编号已存在'})
     result = Event.objects.filter(name=name)
     if result:
-        return JsonResponse({'starus':10023,'message':'发布会名称已存在'})
+        return JsonResponse({'status':10023,'message':'发布会名称已存在'})
     if status == '':
         status = 1
     try:
@@ -28,7 +28,7 @@ def add_event(request):
         Event.objects.create(id=eid,name=name,limit=limit,address=address,status=int(status),start_time=start_time)
     except ValidationError as e:
         error = str(e)
-        return JsonResponse({'starus':10024,'message':error})
+        return JsonResponse({'starus':10024,'message':"日期格式错误"})
 
     return JsonResponse({'starus':200,'message':'添加时间成功'})
 
